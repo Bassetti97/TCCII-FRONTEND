@@ -1,0 +1,785 @@
+/* Estilos globais */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #e8eaf6; /* Cor de fundo suave para a página */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da tela */
+}
+
+/* Cabeçalho */
+header {
+  background-color: #673ab7;
+  color: #fff;
+  padding: 1rem 2rem;
+  width: 100%;
+  text-align: center; /* Centraliza o texto dentro do header */
+  position: fixed; /* Fixa o header no topo */
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve para o header */
+  z-index: 1000; /* Garante que o header fique acima de outros elementos */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 1.5rem; /* Espaçamento entre itens do menu */
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Animação suave para a cor e decoração do texto */
+}
+
+nav a:hover {
+  color: #f0f0f0;
+  text-decoration: underline;
+}
+
+/* Ajustes para a Página Inicial */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o container ocupe toda a altura da tela */
+  padding-top: 80px; /* Espaçamento para o header */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  background: linear-gradient(to bottom, #e8eaf6, #ffffff); /* Gradiente suave de fundo */
+  text-align: center; /* Centraliza o texto */
+}
+
+/* Container do conteúdo da tela inicial */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #ffffff; /* Fundo branco para o conteúdo */
+  border-radius: 15px; /* Borda arredondada */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  max-width: 800px; /* Limita a largura do conteúdo */
+  margin: 2rem; /* Espaçamento em torno do container */
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2.5em; /* Ajusta o tamanho da fonte */
+  color: #e50fde;
+  margin-bottom: 1rem;
+}
+
+.container p {
+  font-size: 1.2em; /* Ajusta o tamanho da fonte do parágrafo */
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #666; /* Cor mais suave para o texto */
+}
+
+.login-button {
+  background: linear-gradient(to right, #673ab7, #9575cd); /* Gradiente no botão */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Aumenta o tamanho da fonte do botão */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave para o fundo e transformação */
+}
+
+.login-button:hover {
+  background: linear-gradient(to right, #5e35b1, #6d28d9); /* Gradiente mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Principal */
+main {
+  flex: 1; /* Faz com que o main ocupe o espaço restante disponível */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #fff; /* Fundo branco para o main */
+  border-radius: 10px; /* Borda arredondada */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  margin-top: 20px; /* Ajusta para não ficar muito perto do header */
+  text-align: center; /* Centraliza o texto no main */
+}
+
+/* Container da seção de login */
+.login-section {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px; /* Borda arredondada */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  width: 100%;
+  max-width: 400px; /* Limita a largura dos componentes */
+  text-align: center; /* Centraliza o texto no login */
+  border: 1px solid #ddd; /* Borda leve ao redor do formulário */
+}
+
+.login-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2em; /* Tamanho da fonte maior para o título */
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+}
+
+.login-section form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-section label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333; /* Cor dos labels */
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para labels */
+}
+
+.login-section input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordas arredondadas */
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animação suave para a cor da borda e sombra */
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para inputs */
+}
+
+.login-section input:focus {
+  border-color: #673ab7; /* Cor da borda ao focar */
+  box-shadow: 0 0 8px rgba(103, 58, 183, 0.5); /* Sombra mais destacada ao focar */
+  outline: none; /* Remove a borda padrão do foco */
+}
+
+.login-section button {
+  background: linear-gradient(to right, #673ab7, #9575cd); /* Gradiente no botão */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Aumenta o tamanho da fonte do botão */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave para o fundo e transformação */
+}
+
+.login-section button:hover {
+  background: linear-gradient(to right, #5e35b1, #6d28d9); /* Gradiente mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Página de Cadastro de Clientes */
+.register-container {
+  background-color: #f5f5f5; /* Fundo mais claro para a página de cadastro */
+}
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.register-section {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px; /* Borda arredondada */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  width: 100%;
+  max-width: 800px; /* Limita a largura dos componentes */
+}
+
+.register-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2em; /* Tamanho da fonte maior para o título */
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+  text-align: center; /* Centraliza o título */
+}
+
+.register-section form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Espaçamento entre os campos */
+}
+
+.form-row {
+  flex: 1;
+  min-width: 300px; /* Largura mínima para os campos */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333; /* Cor dos labels */
+}
+
+.form-row input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordas arredondadas */
+  margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para inputs */
+}
+
+.form-row input:focus {
+  border-color: #673ab7; /* Cor da borda ao focar */
+  box-shadow: 0 0 8px rgba(103, 58, 183, 0.5); /* Sombra mais destacada ao focar */
+  outline: none; /* Remove a borda padrão do foco */
+}
+
+.register-section button {
+  background: linear-gradient(to right, #673ab7, #9575cd); /* Gradiente no botão */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Aumenta o tamanho da fonte do botão */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave para o fundo e transformação */
+}
+
+.register-section button:hover {
+  background: linear-gradient(to right, #5e35b1, #6d28d9); /* Gradiente mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Seção de Contato */
+.contact-section {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px; /* Borda arredondada */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  width: 100%;
+  max-width: 600px; /* Limita a largura dos componentes */
+  margin: 1rem auto; /* Centraliza a seção e adiciona margem */
+}
+
+.contact-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2em; /* Tamanho da fonte maior para o título */
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+  text-align: center; /* Centraliza o título */
+}
+
+.contact-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-section label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333; /* Cor dos labels */
+}
+
+.contact-section input,
+.contact-section textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordas arredondadas */
+  margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para inputs */
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus {
+  border-color: #673ab7; /* Cor da borda ao focar */
+  box-shadow: 0 0 8px rgba(103, 58, 183, 0.5); /* Sombra mais destacada ao focar */
+  outline: none; /* Remove a borda padrão do foco */
+}
+
+.contact-section button {
+  background: linear-gradient(to right, #673ab7, #9575cd); /* Gradiente no botão */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Aumenta o tamanho da fonte do botão */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave para o fundo e transformação */
+}
+
+.contact-section button:hover {
+  background: linear-gradient(to right, #5e35b1, #6d28d9); /* Gradiente mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Página de Agenda de Horários */
+.schedule-page {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-header h2 {
+  font-size: 2em;
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordas arredondadas */
+  margin-right: 0.5rem;
+  flex: 1;
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para o campo de pesquisa */
+}
+
+.search-bar button {
+  background: #673ab7; /* Cor de fundo do botão */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1em; /* Ajusta o tamanho da fonte do botão */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave para o fundo e transformação */
+}
+
+.search-bar button:hover {
+  background: #5e35b1; /* Cor do botão ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 1rem;
+  border: 1px solid #ddd; /* Borda leve */
+  text-align: center;
+}
+
+.schedule-table th {
+  background-color: #673ab7; /* Cor de fundo dos cabeçalhos */
+  color: #fff; /* Cor do texto dos cabeçalhos */
+}
+
+.schedule-table td {
+  background-color: #f9f9f9; /* Cor de fundo das células */
+}
+
+.schedule-table tr:nth-child(even) td {
+  background-color: #f2f2f2; /* Cor de fundo alternada para linhas pares */
+}
+
+
+
+
+.image-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #000;
+}
+delete-button {
+  background: linear-gradient(to right, #f44336, #d32f2f); /* Gradiente vermelho */
+  color: #f20404;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Tamanho da fonte */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave */
+}
+
+.delete-button:hover {
+  background: linear-gradient(to right, #c62828, #b71c1c); /* Gradiente vermelho escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Botão de Editar */
+.edit-button {
+  background: linear-gradient(to right, #4caf50, #388e3c); /* Gradiente verde */
+  color: #5cf40a;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Tamanho da fonte */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave */
+}
+
+.edit-button:hover {
+  background: linear-gradient(to right, #388e3c, #2c6c29); /* Gradiente verde escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Estilos globais */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #e8eaf6; /* Cor de fundo suave para a página */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da tela */
+}
+
+/* Cabeçalho */
+header {
+  background-color: #673ab7;
+  color: #fff;
+  padding: 1rem 2rem;
+  width: 100%;
+  text-align: center; /* Centraliza o texto dentro do header */
+  position: fixed; /* Fixa o header no topo */
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve para o header */
+  z-index: 1000; /* Garante que o header fique acima de outros elementos */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 1.5rem; /* Espaçamento entre itens do menu */
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Animação suave para a cor e decoração do texto */
+}
+
+nav a:hover {
+  color: #f0f0f0;
+  text-decoration: underline;
+}
+
+/* Container Principal */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o container ocupe toda a altura da tela */
+  padding-top: 80px; /* Espaçamento para o header */
+  background: linear-gradient(to bottom, #e8eaf6, #ffffff); /* Gradiente suave de fundo */
+}
+
+/* Página de Estabelecimento */
+.establishment-page {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.establishment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.establishment-header h2 {
+  font-size: 2.5em;
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+}
+
+.establishment-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px; /* Borda arredondada */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+  width: 100%;
+  max-width: 900px; /* Limita a largura dos componentes */
+  margin: 0 auto; /* Centraliza o container */
+}
+
+.establishment-form h3 {
+  margin-bottom: 1.5rem;
+  font-size: 2em; /* Tamanho da fonte maior para o título */
+  color: #673ab7; /* Cor para o título */
+  font-family: 'Georgia', serif; /* Fonte serifada para o título */
+  text-align: center; /* Centraliza o título */
+}
+
+.establishment-form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Espaçamento entre os campos */
+}
+
+.form-row {
+  flex: 1;
+  min-width: 300px; /* Largura mínima para os campos */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333; /* Cor dos labels */
+}
+
+.form-row input,
+.form-row select {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordas arredondadas */
+  margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif; /* Fonte sans-serif para inputs */
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  border-color: #673ab7; /* Cor da borda ao focar */
+  box-shadow: 0 0 8px rgba(103, 58, 183, 0.5); /* Sombra mais destacada ao focar */
+  outline: none; /* Remove a borda padrão do foco */
+}
+
+/* Botão de Excluir */
+.delete-button {
+  background: linear-gradient(to right, #f44336, #d32f2f); /* Gradiente vermelho */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Tamanho da fonte */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave */
+}
+
+.delete-button:hover {
+  background: linear-gradient(to right, #c62828, #b71c1c); /* Gradiente vermelho escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Botão de Editar */
+.edit-button {
+  background: linear-gradient(to right, #4caf50, #388e3c); /* Gradiente verde */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 1.1em; /* Tamanho da fonte */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animação suave */
+}
+
+.edit-button:hover {
+  background: linear-gradient(to right, #388e3c, #2c6c29); /* Gradiente verde escuro ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* Tabela de Estabelecimentos */
+.establishment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.establishment-table th,
+.establishment-table td {
+  padding: 1rem;
+  border: 1px solid #ddd; /* Borda leve */
+  text-align: center;
+}
+
+.establishment-table th {
+  background-color: #673ab7; /* Cor de fundo dos cabeçalhos */
+  color: #fff; /* Cor do texto dos cabeçalhos */
+}
+
+.establishment-table td {
+  background-color: #f9f9f9; /* Cor de fundo das células */
+}
+
+.establishment-table tr:nth-child(even) td {
+  background-color: #f2f2f2; /* Cor de fundo alternada para linhas pares */
+}
+/* App.css ou seu arquivo CSS */
+/* Estilos para o Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal esteja acima de outros elementos */
+}
+
+.modal-content {
+  background: #fff; /* Fundo branco para o conteúdo do modal */
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%; /* Ajusta a largura do modal conforme necessário */
+  max-width: 500px; /* Define a largura máxima */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ao redor do modal */
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-content button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 5px;
+}
+
+.save-button {
+  background-color: #28a745; /* Verde para o botão de salvar */
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #218838; /* Tom de verde mais escuro no hover */
+}
+
+.close-button {
+  background-color: #dc3545; /* Vermelho para o botão de fechar */
+  color: white;
+}
+
+.close-button:hover {
+  background-color: #c82333; /* Tom de vermelho mais escuro no hover */
+}
+
+/* Estilos para o Header dos Estabelecimentos */
+.establishment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Espaço abaixo do header */
+}
+
+.establishment-header h2 {
+  margin: 0;
+  font-size: 2em; /* Ajusta o tamanho do título */
+}
+
+.add-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Transição suave para hover */
+}
+
+.add-button:hover {
+  background-color: #8c00b3; /* Tom de azul mais escuro no hover */
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.add-button:focus {
+  outline: none; /* Remove o contorno padrão do foco */
+}
+
+/* Estilos para o Header dos Estabelecimentos */
+.establishment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Espaço abaixo do header */
+}
+
+.establishment-header h2 {
+  margin: 0;
+  font-size: 2em; /* Ajusta o tamanho do título */
+  flex-grow: 1; /* Faz o título ocupar o espaço disponível */
+}
+
+.add-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3px;
+  background-color: #aa00fff6; /* Cor de fundo azul */
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Transição suave para hover */
+  margin-left: 20px; /* Espaço à esquerda do botão */
+}
+
+.add-button:hover {
+  background-color: #ac00f0; /* Tom de azul mais escuro no hover */
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.add-button:focus {
+  outline: none; /* Remove o contorno padrão do foco */
+}
+
+
+
