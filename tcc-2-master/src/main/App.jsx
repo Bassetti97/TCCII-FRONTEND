@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import Login from './Login'; 
+import Cliente from './Cliente'; 
+import Agendamento from './Agendamento'; 
+import Estabelecimento from './Estabelecimento';
+
+//import Contact from './Contact'; // Certifique-se de que o caminho está correto
 
 // Componente com Imagem (removido)
 const ImageComponent = () => {
@@ -11,36 +17,55 @@ const ImageComponent = () => {
   );
 };
 
-// Página Inicial
+// Componente Home
 const Home = () => {
   return (
-    <div className="login-container">
+    <div className="home-container">
       <header>
         <nav>
           <ul>
             <li><Link to="/">Início</Link></li>
-            <li><Link to="/schedule">Agenda de Horários</Link></li>
-            <li><Link to="/establishment">Estabelecimento</Link></li>
-            <li><Link to="/register">Cadastro de Clientes</Link></li>
-            <li><Link to="/contact">Fale Conosco</Link></li>
+            <li><Link to="/agendamento">Agendamento</Link></li>
+            <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+            <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+            <li><Link to="/login">Login</Link></li>
           </ul>
         </nav>
       </header>
       <main>
         <div className="container">
-          <h1>Agendamento <br /> Eficiente</h1>
+          <h1 className="home-h1">BeautyBooker</h1>
           <p>A plataforma de agendamentos, onde a eficiência encontra a simplicidade para otimizar seu tempo.</p>
           <Link to="/login" className="login-button">LOGIN</Link>
         </div>
-        <ImageComponent /> {/* Componente removido */}
       </main>
       <footer>
-        <p>&copy; 2023 Agendamento Eficiente. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Agendamento Eficiente. Todos os direitos reservados.</p>
       </footer>
     </div>
   );
 };
 
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} /> {/* Página de Login */}
+        <Route path="/cliente" element={<Cliente />} /> {/* Página de Cliente */}
+        <Route path="/agendamento" element={<Agendamento />} /> {/* Página de Agendamento */}
+        <Route path="/estabelecimento" element={<Estabelecimento />} /> {/* Página de Estabelecimento */}
+      
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+/**
+<Route path="/contact" element={<Contact />} /> 
+<li><Link to="/contact">Fale Conosco</Link></li>
 // Página de Login
 const Login = () => {
   const navigate = useNavigate();
@@ -522,21 +547,7 @@ const Contact = () => {
     </div>
   );
 };
+*/
 
 // Componente App
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/establishment" element={<Establishment />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </Router>
-  );
-};
 
-export default App;
