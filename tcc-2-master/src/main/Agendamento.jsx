@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './App.css'; // Certifique-se de que o caminho está correto.
+import './App.css';
 import { Link } from 'react-router-dom';
+import ClientSearch from './ClientSearch';
+
 
 class Agendamento extends Component {
   constructor(props) {
@@ -11,9 +13,11 @@ class Agendamento extends Component {
       tipoServico: '',
       clienteNome: '', // Nome do cliente
       estabelecimentoNome: '', // Nome do estabelecimento
+      searchTerm: '',
       editId: null,
       loading: true,
       error: null,
+      clienteSelecionado: null,
     };
   }
 
@@ -140,6 +144,38 @@ class Agendamento extends Component {
     }
   };
 
+  // Manipulador de pesquisa
+  handleSearchChange = (e) => {
+    this.setState({ searchTerm: e.target.value });
+  };
+
+  // Filtrar agendamentos pelo nome do cliente
+  filterAgendamentos = () => {
+    const { agendamentos, searchTerm } = this.state;
+
+    if (searchTerm.trim() === '') {
+      return [];
+    }
+
+    // Filtrar agendamentos que correspondem ao cliente pesquisado
+    const agendamentosFiltrados = agendamentos.filter((agendamento) =>
+      agendamento.clienteNome.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return agendamentosFiltrados;
+  };
+
+    // Preencher os dados no formulário para edição
+    handleEditClick = (agendamento) => {
+      this.setState({
+        dataHorario: agendamento.dataHorario,
+        tipoServico: agendamento.tipoServico,
+        clienteNome: agendamento.clienteNome,
+        estabelecimentoNome: agendamento.estabelecimentoNome,
+        editId: agendamento.id,
+      });
+    };
+
   render() {
     const { agendamentos, dataHorario, tipoServico, clienteNome, estabelecimentoNome, loading, error, editId } = this.state;
 
@@ -168,8 +204,13 @@ class Agendamento extends Component {
 
         <div className='agendamento-container'>
 
+          
 
           <h1 className='agendamento-title'>Agendamento de Horário</h1>
+
+          
+          <ClientSearch onClientSelect={this.handleClientSelect} />
+
 
           <form className='agendamento-form' onSubmit={this.handleSubmit}>
             <input

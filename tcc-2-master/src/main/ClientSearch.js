@@ -5,8 +5,13 @@ class ClientSearch extends Component {
         super(props);
         this.state = {
             searchValue: '',
+            searchTerm: '',
             clients: [],
             filteredClients: [],
+            agendamentosCliente: [],
+            clienteSelecionado: null,
+            loading: true,
+            error: null,
             token: localStorage.getItem('token'),
         };
     }
@@ -39,6 +44,32 @@ class ClientSearch extends Component {
         }
     };
 
+     // Função para buscar agendamentos do cliente selecionado
+     fetchAgendamentosCliente = async (nomeCliente) => {
+        const { token } = this.state;
+        if (token) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/agendamentos/cliente/${nomeCliente}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Nenhum agendamento encontrado para este cliente');
+                }
+
+                const data = await response.json();
+                this.setState({ agendamentosCliente: data, error: null });
+            } catch (error) {
+                this.setState({ agendamentosCliente: [], error: error.message });
+                console.error('Erro ao buscar agendamentos:', error);
+            }
+        }
+    };
+
     handleSearch = (e) => {
         const searchValue = e.target.value.toLowerCase(); // Converte o valor da pesquisa para minúsculas
         this.setState({ searchValue });
@@ -51,31 +82,35 @@ class ClientSearch extends Component {
         this.setState({ filteredClients });
     };
 
-    handleEdit = (client) => {
-        // Lógica para editar o cliente
-        console.log('Cliente selecionado para edição:', client);
+    // Função para tratar a seleção de cliente e chamar handleEdit do Cliente.js
+    handleSelectClient = (client) => {
+        this.props.onClientSelect(client);  // Chama o handleEdit passado como prop
+        this.fetchAgendamentosCliente(client.nome);
     };
 
+
+
     render() {
-        const { searchValue, filteredClients } = this.state;
+        const { searchValue, filteredClients, agendamentosCliente, clienteSelecionado, error } = this.state;
 
         return (
-            <div className="cliente-container" style={{ position: 'relative', width: '100%' }}>
+            <div className="cliente-search-container" style={{ position: 'relative', width: '100%' }}>
                 <input
                     type="text"
                     className="cliente-search"
                     value={searchValue}
                     onChange={this.handleSearch}
                     placeholder="Pesquisar Cliente"
-                    style={{ width: '100%', padding: '10px', marginBottom: '15px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1em' }}
+                    style={{ width: '97%', padding: '10px', marginBottom: '15px', border: '1px solid #007bff', borderRadius: '4px', fontSize: '1em' }}
                 />
+
                 {/* Exibir sugestões apenas quando há texto e clientes filtrados */}
                 {searchValue && filteredClients.length > 0 && (
                     <div className="suggestions" id="suggestionsContainer">
                         <ul id="suggestionsList">
                             {filteredClients.map(cliente => (
-                                <li key={cliente.id} onClick={() => this.handleEdit(cliente)}>
-                                    {cliente.nome} {/* Exibindo apenas o nome do cliente */}
+                                <li key={cliente.id} onClick={() => this.handleSelectClient(cliente)}>
+                                    {cliente.nome} {/* Exibe o nome do cliente */}
                                 </li>
                             ))}
                         </ul>
@@ -89,9 +124,30 @@ class ClientSearch extends Component {
                         </ul>
                     </div>
                 )}
-                <ul className="cliente-list" id="clientList">
-                    {/* Lista de clientes cadastrados, se necessário */}
-                </ul>
+
+                {/* Exibir agendamentos do cliente selecionado */}
+                {clienteSelecionado && (
+                    <div className="agendamentos-container">
+                        <h2>Agendamentos de {clienteSelecionado.nome}</h2>
+
+                        {agendamentosCliente.length > 0 ? (
+                            <ul className="agendamentos-list">
+                                {agendamentosCliente.map((agendamento) => (
+                                    <li key={agendamento.id}>
+                                        <p><strong>Data e Horário:</strong> {new Date(agendamento.dataHorario).toLocaleString('pt-BR')}</p>
+                                        <p><strong>Tipo de Serviço:</strong> {agendamento.tipoServico}</p>
+                                        <p><strong>Estabelecimento:</strong> {agendamento.estabelecimentoNome}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>Este cliente não tem nenhum agendamento marcado.</p>
+                        )}
+
+                        {/* Exibir erro, se houver */}
+                        {error && <p className="error">{error}</p>}
+                    </div>
+                )}
             </div>
         );
     }

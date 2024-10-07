@@ -144,6 +144,7 @@ class Cliente extends Component {
       },
     })
       .then((response) => {
+        console.log('Response:', response);
         if (!response.ok) {
           throw new Error('Erro ao remover cliente.');
         }
@@ -220,26 +221,8 @@ class Cliente extends Component {
         <div className="cliente-container">
           <h1 className="cliente-title">Cadastro de Clientes</h1>
 
-          <input
-            type="text"
-            className="cliente-search"
-            placeholder="Buscar por nome"
-            value={searchValue}
-            onChange={this.handleSearch}
-          />
-          <div className="suggestions" id="suggestionsContainer" style={{ visibility: filteredClientes.length > 0 ? 'visible' : 'hidden', position: 'absolute' }}>
-            <ul id="suggestionsList">
-              {filteredClientes.length > 0 ? (
-                filteredClientes.map(cliente => (
-                  <li key={cliente.id} onClick={() => this.handleEdit(cliente)}>
-                    {cliente.nome}
-                  </li>
-                ))
-              ) : (
-                <li>Nenhum cliente encontrado.</li>
-              )}
-            </ul>
-          </div>
+          
+         <ClientSearch onClientSelect={this.handleEdit} />
 
 
           <form className="cliente-form" onSubmit={this.handleSubmit}>
