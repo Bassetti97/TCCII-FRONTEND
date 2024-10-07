@@ -1,3 +1,14 @@
+
+
+main {
+  flex-grow: 1;                  /* Faz o conteúdo principal crescer para ocupar o espaço restante */
+  display: flex;                 /* Usando flexbox para centralizar o conteúdo */
+  align-items: center;           /* Centraliza verticalmente */
+  justify-content: center;        /* Centraliza horizontalmente */
+  text-align: center;            /* Centraliza o texto */
+  padding: 20px;                 /* Espaçamento interno */
+}
+
 /* Estilos para o Componente Home */
 .home-container {
   display: flex;                  /* Usando flexbox para layout */
@@ -33,15 +44,6 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #ffcc00;                 /* Cor do link ao passar o mouse */
-}
-
-main {
-  flex-grow: 1;                  /* Faz o conteúdo principal crescer para ocupar o espaço restante */
-  display: flex;                 /* Usando flexbox para centralizar o conteúdo */
-  align-items: center;           /* Centraliza verticalmente */
-  justify-content: center;        /* Centraliza horizontalmente */
-  text-align: center;            /* Centraliza o texto */
-  padding: 20px;                 /* Espaçamento interno */
 }
 
 .container {
@@ -198,11 +200,20 @@ button:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 20px auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .estabelecimento-title {
-  font-size: 24px;
+  text-align: center;
+  color: #007bff;
   margin-bottom: 20px;
 }
 
@@ -214,66 +225,72 @@ button:disabled {
 }
 
 .estabelecimento-input {
-  margin-bottom: 10px;
+  width: auto;
+  max-width: calc(100% - 20px);
   padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
   border-radius: 4px;
-  width: 100%;
+  font-size: 16px;
+}
+
+/* Grupo de Botões (Editar / Excluir) */
+.estabelecimento-button-group {
+  display: flex;
+  gap: 10px;
 }
 
 .estabelecimento-button {
   padding: 10px;
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .estabelecimento-button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
 .estabelecimento-list {
   list-style-type: none;
   padding: 0;
-  width: 100%;
-  max-width: 500px;
+  
 }
 
 .estabelecimento-item {
   padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-bottom: 1px solid #dee2e6;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .estabelecimento-button-edit {
-  background-color: #2196f3;
+  background-color: #ffc107;
   color: white;
   border: none;
-  padding: 5px 10px;
   border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
 .estabelecimento-button-delete {
-  background-color: #f44336;
+  background-color: #dc3545;
   color: white;
   border: none;
-  padding: 5px 10px;
   border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
-.estabelecimento-button-edit:hover,
+.estabelecimento-button-edit:hover{
+  background-color: #e0a800;
+}
 .estabelecimento-button-delete:hover {
-  opacity: 0.8;
+  background-color: #c82333;
 }
 
 .estabelecimento-loading,
@@ -291,8 +308,14 @@ button:disabled {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #f5f5f5;
+  
+
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .agendamento-title {
@@ -305,16 +328,26 @@ button:disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
+  padding: 20px;
   gap: 10px;
+  max-width: 550px;
+  margin: 20px auto;
 }
 
 .agendamento-input {
+  width: auto;
+  max-width: calc(100% - 20px);
   padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  width: 100%;
+  font-size: 16px;
+}
+
+/* Grupo de Botões (Editar / Excluir) */
+.agendamento-button-group {
+  display: flex;
+  gap: 10px;
 }
 
 .agendamento-button {
@@ -332,46 +365,38 @@ button:disabled {
 }
 
 .agendamento-list {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
 }
 
 .agendamento-item {
-  background-color: #fff;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.agendamento-edit-button,
-.agendamento-delete-button {
-  padding: 5px 10px;
-  margin-left: 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 0.9rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .agendamento-edit-button {
-  background-color: #28a745;
+  background-color: #ffc107;
   color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
-.agendamento-delete-button {
+.agendamento-delete-button{
   background-color: #dc3545;
   color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .agendamento-edit-button:hover {
-  background-color: #218838;
+  background-color: #e0a800;
 }
 
 .agendamento-delete-button:hover {

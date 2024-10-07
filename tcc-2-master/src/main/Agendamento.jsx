@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './App.css'; // Certifique-se de que o caminho está correto.
 import { Link } from 'react-router-dom';
 
-
-
 class Agendamento extends Component {
   constructor(props) {
     super(props);
@@ -154,20 +152,22 @@ class Agendamento extends Component {
     }
 
     return (
-      <div className='agendamento-container'>
+      <div className='agendamento-home-container'>
+        <header>
+          <nav>
+            <ul>
+              <li><Link to="/">Início</Link></li>
+              <li><Link to="/agendamento">Agendamento</Link></li>
+              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          </nav>
+        </header>
 
-        <div className="home-container">
-          <header>
-            <nav>
-              <ul>
-                <li><Link to="/">Início</Link></li>
-                <li><Link to="/agendamento">Agendamento</Link></li>
-                <li><Link to="/estabelecimento">Estabelecimento</Link></li>
-                <li><Link to="/cliente">Cadastro de Clientes</Link></li>
-                <li><Link to="/login">Login</Link></li>
-              </ul>
-            </nav>
-          </header>
+
+        <div className='agendamento-container'>
+
 
           <h1 className='agendamento-title'>Agendamento de Horário</h1>
 
@@ -210,37 +210,42 @@ class Agendamento extends Component {
           </form>
 
           <ul className='agendamento-list'>
-            {agendamentos.map((agendamento) => (
-              <li className='agendamento-item' key={agendamento.id}>
-                {agendamento.dataHorario} - {agendamento.tipoServico} - {agendamento.clienteNome} - {agendamento.estabelecimentoNome}{' '}
-                <button
-                  className='agendamento-edit-button'
-                  onClick={() =>
-                    this.setState({
+            {agendamentos.map((agendamento) => {
+              // Formatação da data e horário
+              const dataHorarioFormatada = new Date(agendamento.dataHorario).toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+              }).replace(',', ' -'); // Troca a vírgula por " - "
+
+              return (
+                <li className='agendamento-item' key={agendamento.id}>
+                  {dataHorarioFormatada} - {agendamento.tipoServico} - {agendamento.clienteNome} - {agendamento.estabelecimentoNome}
+                  <div className="agendamento-button-group">
+                    <button className='agendamento-edit-button' onClick={() => this.setState({
                       dataHorario: agendamento.dataHorario,
                       tipoServico: agendamento.tipoServico,
                       clienteNome: agendamento.clienteNome,
                       estabelecimentoNome: agendamento.estabelecimentoNome,
                       editId: agendamento.id,
-                    })
-                  }
-                >
-                  Editar
-                </button>
-                <button className='agendamento-delete-button' onClick={() => this.deleteAgendamento(agendamento.id)}>Remover</button>
-              </li>
-            ))}
+                    })}>Editar
+                    </button>
+                    <button className='agendamento-delete-button' onClick={() => this.deleteAgendamento(agendamento.id)}>Excluir</button>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
-          <footer>
-            <p>&copy; 2024 Agendamento Eficiente. Todos os direitos reservados.</p>
-          </footer>
-        </div>
 
+        </div>
       </div>
+
     );
   }
 }
-
 
 export default Agendamento;

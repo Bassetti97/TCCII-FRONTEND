@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ClientSearch from './ClientSearch';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 class Cliente extends Component {
   constructor(props) {
@@ -202,117 +203,132 @@ class Cliente extends Component {
     }
 
     return (
-      <div className="cliente-container">
-        <h1 className="cliente-title">Cadastro de Clientes</h1>
+      <div className='agendamento-home-container'>
+        <header>
+          <nav>
+            <ul>
+              <li><Link to="/">Início</Link></li>
+              <li><Link to="/agendamento">Agendamento</Link></li>
+              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          </nav>
+        </header>
 
-        <input
-          type="text"
-          className="cliente-search"
-          placeholder="Buscar por nome"
-          value={searchValue}
-          onChange={this.handleSearch}
-        />
-        <div className="suggestions" id="suggestionsContainer" style={{ visibility: filteredClientes.length > 0 ? 'visible' : 'hidden', position: 'absolute' }}>
-          <ul id="suggestionsList">
+
+        <div className="cliente-container">
+          <h1 className="cliente-title">Cadastro de Clientes</h1>
+
+          <input
+            type="text"
+            className="cliente-search"
+            placeholder="Buscar por nome"
+            value={searchValue}
+            onChange={this.handleSearch}
+          />
+          <div className="suggestions" id="suggestionsContainer" style={{ visibility: filteredClientes.length > 0 ? 'visible' : 'hidden', position: 'absolute' }}>
+            <ul id="suggestionsList">
+              {filteredClientes.length > 0 ? (
+                filteredClientes.map(cliente => (
+                  <li key={cliente.id} onClick={() => this.handleEdit(cliente)}>
+                    {cliente.nome}
+                  </li>
+                ))
+              ) : (
+                <li>Nenhum cliente encontrado.</li>
+              )}
+            </ul>
+          </div>
+
+
+          <form className="cliente-form" onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              className="cliente-input"
+              name="nome"
+              value={this.state.nome}
+              onChange={(e) => this.setState({ nome: e.target.value })}
+              placeholder="Nome"
+            />
+            <input
+              type="text"
+              className="cliente-input"
+              name="cpf"
+              value={this.state.cpf}
+              onChange={(e) => this.setState({ cpf: e.target.value })}
+              placeholder="CPF"
+            />
+            <input
+              type="date"
+              className="cliente-input"
+              name="dataNascimento"
+              value={this.state.dataNascimento}
+              onChange={(e) => this.setState({ dataNascimento: e.target.value })}
+              placeholder="Data de Nascimento"
+            />
+            <input
+              type="text"
+              className="cliente-input"
+              name="logradouro"
+              value={this.state.logradouro}
+              onChange={(e) => this.setState({ logradouro: e.target.value })}
+              placeholder="Logradouro"
+            />
+            <input
+              type="text"
+              className="cliente-input"
+              name="complemento"
+              value={this.state.complemento}
+              onChange={(e) => this.setState({ complemento: e.target.value })}
+              placeholder="Complemento"
+            />
+            <input
+              type="text"
+              className="cliente-input"
+              name="cep"
+              value={this.state.cep}
+              onChange={(e) => this.setState({ cep: e.target.value })}
+              placeholder="CEP"
+            />
+            <input
+              type="text"
+              className="cliente-input"
+              name="telefone"
+              value={this.state.telefone}
+              onChange={(e) => this.setState({ telefone: e.target.value })}
+              placeholder="Telefone"
+            />
+            <input
+              type="email"
+              className="cliente-input"
+              name="email"
+              value={this.state.email}
+              onChange={(e) => this.setState({ email: e.target.value })}
+              placeholder="Email"
+            />
+            <button type="submit" className="cliente-button">
+              {this.state.editId ? 'Atualizar' : 'Adicionar'}
+            </button>
+          </form>
+
+          {/* Listagem dos clientes filtrados */}
+          <ul className="cliente-list">
             {filteredClientes.length > 0 ? (
-              filteredClientes.map(cliente => (
-                <li key={cliente.id} onClick={() => this.handleEdit(cliente)}>
-                  {cliente.nome}
+              filteredClientes.map((cliente) => (
+                <li className="cliente-item" key={cliente.id}>
+                  {cliente.nome} - {cliente.cpf}
+                  <div className="cliente-button-group">
+                    <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
+                    <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
+                  </div>
                 </li>
               ))
             ) : (
-              <li>Nenhum cliente encontrado.</li>
+              <p>Nenhum cliente encontrado.</p>
             )}
           </ul>
         </div>
-
-
-        <form className="cliente-form" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            className="cliente-input"
-            name="nome"
-            value={this.state.nome}
-            onChange={(e) => this.setState({ nome: e.target.value })}
-            placeholder="Nome"
-          />
-          <input
-            type="text"
-            className="cliente-input"
-            name="cpf"
-            value={this.state.cpf}
-            onChange={(e) => this.setState({ cpf: e.target.value })}
-            placeholder="CPF"
-          />
-          <input
-            type="date"
-            className="cliente-input"
-            name="dataNascimento"
-            value={this.state.dataNascimento}
-            onChange={(e) => this.setState({ dataNascimento: e.target.value })}
-            placeholder="Data de Nascimento"
-          />
-          <input
-            type="text"
-            className="cliente-input"
-            name="logradouro"
-            value={this.state.logradouro}
-            onChange={(e) => this.setState({ logradouro: e.target.value })}
-            placeholder="Logradouro"
-          />
-          <input
-            type="text"
-            className="cliente-input"
-            name="complemento"
-            value={this.state.complemento}
-            onChange={(e) => this.setState({ complemento: e.target.value })}
-            placeholder="Complemento"
-          />
-          <input
-            type="text"
-            className="cliente-input"
-            name="cep"
-            value={this.state.cep}
-            onChange={(e) => this.setState({ cep: e.target.value })}
-            placeholder="CEP"
-          />
-          <input
-            type="text"
-            className="cliente-input"
-            name="telefone"
-            value={this.state.telefone}
-            onChange={(e) => this.setState({ telefone: e.target.value })}
-            placeholder="Telefone"
-          />
-          <input
-            type="email"
-            className="cliente-input"
-            name="email"
-            value={this.state.email}
-            onChange={(e) => this.setState({ email: e.target.value })}
-            placeholder="Email"
-          />
-          <button type="submit" className="cliente-button">
-            {this.state.editId ? 'Atualizar' : 'Adicionar'}
-          </button>
-        </form>
-
-        {/* Listagem dos clientes filtrados */}
-        <ul className="cliente-list">
-          {filteredClientes.length > 0 ? (
-            filteredClientes.map((cliente) => (
-              <li className="cliente-item" key={cliente.id}>
-                {cliente.nome} - {cliente.cpf}
-                <div className="cliente-button-group">
-                  <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
-                  <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
-                </div>
-              </li>
-            ))
-          ) : (
-            <p>Nenhum cliente encontrado.</p>
-          )}
-        </ul>
       </div>
     );
   }

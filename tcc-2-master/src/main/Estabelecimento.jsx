@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 class Estabelecimento extends Component {
   constructor(props) {
@@ -147,65 +148,83 @@ class Estabelecimento extends Component {
     if (error) return <p className="estabelecimento-error">Erro: {error.message}</p>;
 
     return (
-      <div className="estabelecimento-container">
-        <h1 className="estabelecimento-title">Gerenciamento de Estabelecimentos</h1>
 
-        <form className="estabelecimento-form" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="nome"
-            className="estabelecimento-input"
-            value={nome}
-            onChange={this.handleInputChange}
-            placeholder="Nome do Estabelecimento"
-          />
-          <input
-            type="text"
-            name="endereco"
-            className="estabelecimento-input"
-            value={endereco}
-            onChange={this.handleInputChange}
-            placeholder="Endereço"
-          />
-          <input
-            type="text"
-            name="contato"
-            className="estabelecimento-input"
-            value={contato}
-            onChange={this.handleInputChange}
-            placeholder="Contato"
-          />
-          <button type="submit" className="estabelecimento-button">
-            {editId ? 'Atualizar' : 'Adicionar'}
-          </button>
-        </form>
+      <div className='agendamento-home-container'>
+        <header>
+          <nav>
+            <ul>
+              <li><Link to="/">Início</Link></li>
+              <li><Link to="/agendamento">Agendamento</Link></li>
+              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          </nav>
+        </header>
 
-        <ul className="estabelecimento-list">
-          {estabelecimentos.map((estabelecimento) => (
-            <li key={estabelecimento.id} className="estabelecimento-item">
-              {estabelecimento.nome} - {estabelecimento.endereco} - {estabelecimento.contato}{' '}
-              <button
-                className="estabelecimento-button-edit"
-                onClick={() =>
-                  this.setState({
-                    nome: estabelecimento.nome,
-                    endereco: estabelecimento.endereco,
-                    contato: estabelecimento.contato,
-                    editId: estabelecimento.id,
-                  })
-                }
-              >
-                Editar
-              </button>
-              <button
-                className="estabelecimento-button-delete"
-                onClick={() => this.deleteEstabelecimento(estabelecimento.id)}
-              >
-                Remover
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="estabelecimento-container">
+
+          <h1 className="estabelecimento-title">Cadastro de Estabelecimentos</h1>
+
+          <form className="estabelecimento-form" onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="nome"
+              className="estabelecimento-input"
+              value={nome}
+              onChange={this.handleInputChange}
+              placeholder="Nome do Estabelecimento"
+            />
+            <input
+              type="text"
+              name="endereco"
+              className="estabelecimento-input"
+              value={endereco}
+              onChange={this.handleInputChange}
+              placeholder="Endereço"
+            />
+            <input
+              type="text"
+              name="contato"
+              className="estabelecimento-input"
+              value={contato}
+              onChange={this.handleInputChange}
+              placeholder="Contato"
+            />
+            <button type="submit" className="estabelecimento-button">
+              {editId ? 'Atualizar' : 'Adicionar'}
+            </button>
+          </form>
+
+          <ul className="estabelecimento-list">
+            {estabelecimentos.map((estabelecimento) => (
+              <li key={estabelecimento.id} className="estabelecimento-item">
+                {estabelecimento.nome} - {estabelecimento.endereco}{' '}
+                <div className='estabelecimento-button-group'>
+                  <button
+                    className="estabelecimento-button-edit"
+                    onClick={() =>
+                      this.setState({
+                        nome: estabelecimento.nome,
+                        endereco: estabelecimento.endereco,
+                        contato: estabelecimento.contato,
+                        editId: estabelecimento.id,
+                      })
+                    }
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="estabelecimento-button-delete"
+                    onClick={() => this.deleteEstabelecimento(estabelecimento.id)}
+                  >
+                    Excluir
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
