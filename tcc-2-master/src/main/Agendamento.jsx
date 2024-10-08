@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
 import ClientSearch from './ClientSearch';
+import AgendamentoSearch from './AgendamentoSearch';
 
 
 class Agendamento extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      agendamentosCliente: [],
       agendamentos: [],
       dataHorario: '',
       tipoServico: '',
@@ -58,21 +60,35 @@ class Agendamento extends Component {
         },
         body: JSON.stringify({ dataHorario, tipoServico, clienteNome, estabelecimentoNome }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            // Se a resposta não estiver ok (ex: 400, 404, 500), lança um erro
+            return response.json().then((errorData) => {
+              throw new Error(errorData.message || 'Erro ao adicionar agendamento');
+            });
+          }
+          return response.json(); // Caso sucesso, retorna o JSON da resposta
+        })
         .then((data) => {
+          // Limpa o estado do formulário e adiciona o novo agendamento
           this.setState((prevState) => ({
             agendamentos: [...prevState.agendamentos, data],
             dataHorario: '',
             tipoServico: '',
             clienteNome: '',
             estabelecimentoNome: '',
+            errorMessage: null, // Limpa a mensagem de erro ao ter sucesso
           }));
         })
         .catch((error) => {
-          console.error('Erro ao adicionar agendamento:', error);
+          // Captura o erro e define a mensagem no estado para exibir ao usuário
+          this.setState({ errorMessage: error.message });
         });
+    } else {
+      this.setState({ errorMessage: 'Por favor, preencha todos os campos!' });
     }
   };
+
 
   // Método para atualizar um agendamento (PUT)
   updateAgendamento = (id) => {
@@ -128,6 +144,42 @@ class Agendamento extends Component {
       });
   };
 
+  // Função para buscar agendamentos do cliente selecionado
+  fetchAgendamentosCliente = (nomeCliente) => {
+
+
+    const { token } = this.state;
+    if (token) {
+      fetch(`http://localhost:8080/api/agendamentos/cliente/${nomeCliente}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Nenhum agendamento encontrado para este cliente');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.setState({ agendamentosCliente: data, error: null });
+        })
+        .catch(error => {
+          this.setState({ agendamentosCliente: [], error: error.message });
+          console.error('Erro ao buscar agendamentos:', error);
+        });
+    }
+  };
+
+
+  handleSelectClient = (cliente) => {
+    this.setState({ clienteSelecionado: cliente });
+    this.fetchAgendamentosCliente(cliente.nome); // Chama a função para buscar os agendamentos do cliente
+  };
+
+
   // Manipulador de input
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -165,19 +217,19 @@ class Agendamento extends Component {
     return agendamentosFiltrados;
   };
 
-    // Preencher os dados no formulário para edição
-    handleEditClick = (agendamento) => {
-      this.setState({
-        dataHorario: agendamento.dataHorario,
-        tipoServico: agendamento.tipoServico,
-        clienteNome: agendamento.clienteNome,
-        estabelecimentoNome: agendamento.estabelecimentoNome,
-        editId: agendamento.id,
-      });
-    };
+  // Preencher os dados no formulário para edição
+  handleEditClick = (agendamento) => {
+    this.setState({
+      dataHorario: agendamento.dataHorario,
+      tipoServico: agendamento.tipoServico,
+      clienteNome: agendamento.cliente.nome, // Ajustando para acessar o nome dentro do objeto cliente
+      estabelecimentoNome: agendamento.estabelecimento.nome, // Ajustando para acessar o nome dentro do objeto estabelecimento
+      editId: agendamento.id,
+    });
+  };
 
   render() {
-    const { agendamentos, dataHorario, tipoServico, clienteNome, estabelecimentoNome, loading, error, editId } = this.state;
+    const { agendamentos, dataHorario, tipoServico, clienteNome, estabelecimentoNome, loading, error, editId, errorMessage, clienteSelecionado, agendamentosCliente } = this.state;
 
     if (loading) {
       return <p className='agendamento-loading'>Carregando...</p>;
@@ -186,6 +238,11 @@ class Agendamento extends Component {
     if (error) {
       return <p className='agendamento-error'>Erro: {error.message}</p>;
     }
+
+    // Filtrar agendamentos que já passaram e ordenar por data e horário
+    const agendamentosFuturos = agendamentos
+      .filter(agendamento => new Date(agendamento.dataHorario) > new Date()) // Filtra agendamentos futuros
+      .sort((a, b) => new Date(a.dataHorario) - new Date(b.dataHorario)); // Ordena em ordem crescente
 
     return (
       <div className='agendamento-home-container'>
@@ -201,16 +258,13 @@ class Agendamento extends Component {
           </nav>
         </header>
 
-
         <div className='agendamento-container'>
+          <h1 className='agendamento-title'>Agendamento de Horários</h1>
 
-          
-
-          <h1 className='agendamento-title'>Agendamento de Horário</h1>
-
-          
           <ClientSearch onClientSelect={this.handleClientSelect} />
+          {clienteSelecionado && (<AgendamentoSearch cliente={clienteSelecionado} agendamentos={agendamentosCliente}/>)}
 
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} {/* Exibe a mensagem de erro */}
 
           <form className='agendamento-form' onSubmit={this.handleSubmit}>
             <input
@@ -251,42 +305,33 @@ class Agendamento extends Component {
           </form>
 
           <ul className='agendamento-list'>
-            {agendamentos.map((agendamento) => {
+            {agendamentosFuturos.map((agendamento) => {
               // Formatação da data e horário
-              const dataHorarioFormatada = new Date(agendamento.dataHorario).toLocaleString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-              }).replace(',', ' -'); // Troca a vírgula por " - "
+              const data = new Date(agendamento.dataHorario).toLocaleDateString('pt-BR');
+              const horario = new Date(agendamento.dataHorario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
 
               return (
                 <li className='agendamento-item' key={agendamento.id}>
-                  {dataHorarioFormatada} - {agendamento.tipoServico} - {agendamento.clienteNome} - {agendamento.estabelecimentoNome}
+                  <div className="agendamento-details">
+                    <p>Data: {data}</p>
+                    <p>Horário: {horario}</p>
+                    <p>Cliente: {agendamento.cliente.nome}</p>
+                    <p>Estabelecimento: {agendamento.estabelecimento.nome}</p>
+                    <p>Serviço: {agendamento.tipoServico}</p>
+                  </div>
                   <div className="agendamento-button-group">
-                    <button className='agendamento-edit-button' onClick={() => this.setState({
-                      dataHorario: agendamento.dataHorario,
-                      tipoServico: agendamento.tipoServico,
-                      clienteNome: agendamento.clienteNome,
-                      estabelecimentoNome: agendamento.estabelecimentoNome,
-                      editId: agendamento.id,
-                    })}>Editar
-                    </button>
+                    <button className='agendamento-edit-button' onClick={() => this.handleEditClick(agendamento)}>Editar</button>
                     <button className='agendamento-delete-button' onClick={() => this.deleteAgendamento(agendamento.id)}>Excluir</button>
                   </div>
                 </li>
               );
             })}
           </ul>
-
-
         </div>
       </div>
-
     );
   }
+
 }
 
 export default Agendamento;

@@ -60,7 +60,7 @@ h1 {
 }
 
 p {
-  font-size: 1.2em;              /* Tamanho da fonte do parágrafo */
+  font-size: 1em;              /* Tamanho da fonte do parágrafo */
   color: #666;                   /* Cor do texto */
   margin: 20px 0;               /* Margem vertical */
 }
@@ -221,7 +221,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
 }
 
 .estabelecimento-input {
@@ -232,12 +232,6 @@ button:disabled {
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 16px;
-}
-
-/* Grupo de Botões (Editar / Excluir) */
-.estabelecimento-button-group {
-  display: flex;
-  gap: 10px;
 }
 
 .estabelecimento-button {
@@ -254,36 +248,57 @@ button:disabled {
   background-color: #0056b3;
 }
 
+
 .estabelecimento-list {
   list-style-type: none;
   padding: 0;
-  
+  width: 100%; /* Para ocupar 100% do espaço disponível */
+  max-width: 600px; /* Ou outro valor desejado */
+  margin: 0 auto; /* Centraliza a lista */
 }
+
+
 
 .estabelecimento-item {
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Mantém o alinhamento ao topo */
+}
+
+.estabelecimento-details {
+  display: flex;
+  flex-direction: column; /* Exibe os detalhes em coluna */
+  margin-right: 20px; /* Espaço entre detalhes e botões */
+}
+
+.estabelecimento-details p {
+  margin: 5px 0; /* Espaçamento entre os parágrafos */
+}
+
+.estabelecimento-button-group {
+  display: flex;
+  gap: 10px;
+  align-self: flex-start; /* Alinha os botões ao topo do item */
+}
+
+.estabelecimento-button-edit,
+.estabelecimento-button-delete {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .estabelecimento-button-edit {
   background-color: #ffc107;
   color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
 
 .estabelecimento-button-delete {
   background-color: #dc3545;
   color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
 
 .estabelecimento-button-edit:hover{
@@ -319,19 +334,19 @@ button:disabled {
 }
 
 .agendamento-title {
-  font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
+  color: #007bff
 }
 
 .agendamento-form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   gap: 10px;
-  max-width: 550px;
-  margin: 20px auto;
+  
+  max-width: 540px;
 }
 
 .agendamento-input {
@@ -344,11 +359,6 @@ button:disabled {
   font-size: 16px;
 }
 
-/* Grupo de Botões (Editar / Excluir) */
-.agendamento-button-group {
-  display: flex;
-  gap: 10px;
-}
 
 .agendamento-button {
   padding: 10px;
@@ -367,33 +377,55 @@ button:disabled {
 .agendamento-list {
   list-style-type: none;
   padding: 0;
+  width: 100%; /* Para ocupar 100% do espaço disponível */
+  max-width: 600px; /* Ou outro valor desejado */
+  margin: 0 auto; /* Centraliza a lista */
 }
+
+
 
 .agendamento-item {
   padding: 10px;
-    border-bottom: 1px solid #dee2e6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Mantém o alinhamento ao topo */
+}
+
+.agendamento-details {
+  display: flex;
+  flex-direction: column; /* Exibe os detalhes em coluna */
+  margin-right: 20px; /* Espaço entre detalhes e botões */
+}
+
+.agendamento-details p {
+  margin: 5px 0; /* Espaçamento entre os parágrafos */
+}
+
+.agendamento-button-group {
+  display: flex;
+  gap: 10px;
+  align-self: flex-start; /* Alinha os botões ao topo do item */
+}
+
+.agendamento-edit-button,
+.agendamento-delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .agendamento-edit-button {
   background-color: #ffc107;
   color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
 
-.agendamento-delete-button{
+.agendamento-delete-button {
   background-color: #dc3545;
   color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
+
 
 .agendamento-edit-button:hover {
   background-color: #e0a800;
@@ -523,49 +555,60 @@ button:disabled {
   background-color: #0056b3;
 }
 
-/* Lista de Clientes */
 .cliente-list {
   list-style-type: none;
   padding: 0;
+  width: 100%; /* Para ocupar 100% do espaço disponível */
+  max-width: 600px; /* Ou outro valor desejado */
+  margin: 0 auto; /* Centraliza a lista */
 }
 
-/* Item da Lista de Clientes */
+
+
 .cliente-item {
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Mantém o alinhamento ao topo */
 }
 
-/* Grupo de Botões (Editar / Excluir) */
+.cliente-details {
+  display: flex;
+  flex-direction: column; /* Exibe os detalhes em coluna */
+  margin-right: 20px; /* Espaço entre detalhes e botões */
+}
+
+.cliente-details p {
+  margin: 5px 0; /* Espaçamento entre os parágrafos */
+}
+
 .cliente-button-group {
   display: flex;
   gap: 10px;
+  align-self: flex-start; /* Alinha os botões ao topo do item */
 }
 
-/* Botão de Editar */
+.cliente-edit-button,
+.cliente-delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .cliente-edit-button {
   background-color: #ffc107;
   color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
+}
+
+.cliente-delete-button {
+  background-color: #dc3545;
+  color: white;
 }
 
 .cliente-edit-button:hover {
   background-color: #e0a800;
-}
-
-/* Botão de Excluir */
-.cliente-delete-button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
 
 .cliente-delete-button:hover {

@@ -90,7 +90,7 @@ class ClientSearch extends Component {
 
 
 
-    render() {
+     render() {
         const { searchValue, filteredClients, agendamentosCliente, clienteSelecionado, error } = this.state;
 
         return (

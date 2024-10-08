@@ -199,7 +199,13 @@ class Estabelecimento extends Component {
           <ul className="estabelecimento-list">
             {estabelecimentos.map((estabelecimento) => (
               <li key={estabelecimento.id} className="estabelecimento-item">
-                {estabelecimento.nome} - {estabelecimento.endereco}{' '}
+
+                <div className="estabelecimento-details">
+                  <p>Nome do Estabelecimento: {estabelecimento.nome}</p>
+                  <p>Endereço: {estabelecimento.endereco}</p>
+                  <p>Contato: {estabelecimento.contato}</p>
+                </div>
+
                 <div className='estabelecimento-button-group'>
                   <button
                     className="estabelecimento-button-edit"

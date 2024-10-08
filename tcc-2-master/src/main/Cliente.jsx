@@ -221,8 +221,8 @@ class Cliente extends Component {
         <div className="cliente-container">
           <h1 className="cliente-title">Cadastro de Clientes</h1>
 
-          
-         <ClientSearch onClientSelect={this.handleEdit} />
+
+          <ClientSearch onClientSelect={this.handleEdit} />
 
 
           <form className="cliente-form" onSubmit={this.handleSubmit}>
@@ -300,7 +300,11 @@ class Cliente extends Component {
             {filteredClientes.length > 0 ? (
               filteredClientes.map((cliente) => (
                 <li className="cliente-item" key={cliente.id}>
-                  {cliente.nome} - {cliente.cpf}
+
+                  <div className="cliente-details">
+                    <p>Nome: {cliente.nome}</p>
+                    <p>CPF: {cliente.cpf}</p>
+                  </div>
                   <div className="cliente-button-group">
                     <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
                     <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
