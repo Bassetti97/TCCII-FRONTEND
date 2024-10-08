@@ -94,7 +94,7 @@ class ClientSearch extends Component {
         const { searchValue, filteredClients, agendamentosCliente, clienteSelecionado, error } = this.state;
 
         return (
-            <div className="cliente-search-container" style={{ position: 'relative', width: '100%' }}>
+            <div className="cliente-search-container" style={{ position: 'relative', width: '97%' }}>
                 <input
                     type="text"
                     className="cliente-search"

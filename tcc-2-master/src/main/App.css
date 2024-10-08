@@ -30,7 +30,12 @@ nav ul {
   justify-content: space-around;  /* Espaçamento igual entre os itens */
   margin: 0;                     /* Remove margens */
   padding: 0;                     /* Remove padding */
+
+  flex-direction: column;
+  align-items: center;
 }
+
+
 
 nav ul li {
   font-size: 1.1em;               /* Tamanho da fonte */
