@@ -33,7 +33,7 @@ class Estabelecimento extends Component {
   };
 
   fetchEstabelecimentos = () => {
-    fetch('http://localhost:8080/api/estabelecimentos', {
+    fetch(`https://lovely-solace-production.up.railway.app/api/estabelecimentos`, {
       headers: this.getAuthHeaders(),
     })
       .then((response) => {
@@ -52,7 +52,7 @@ class Estabelecimento extends Component {
     const { nome, endereco, contato } = this.state;
 
     if (nome && endereco && contato) {
-      fetch('http://localhost:8080/api/estabelecimentos', {
+      fetch(`https://lovely-solace-production.up.railway.app/api/estabelecimentos`, {
         method: 'POST',
         headers: this.getAuthHeaders(),
         body: JSON.stringify({ nome, endereco, contato }),
@@ -82,7 +82,7 @@ class Estabelecimento extends Component {
   updateEstabelecimento = (id) => {
     const { nome, endereco, contato } = this.state;
 
-    fetch(`http://localhost:8080/api/estabelecimentos/${id}`, {
+    fetch(`https://lovely-solace-production.up.railway.app/api/estabelecimentos/${id}`, {
       method: 'PUT',
       headers: this.getAuthHeaders(),
       body: JSON.stringify({ nome, endereco, contato }),
@@ -109,7 +109,7 @@ class Estabelecimento extends Component {
   };
 
   deleteEstabelecimento = (id) => {
-    fetch(`http://localhost:8080/api/estabelecimentos/${id}`, {
+    fetch(`https://lovely-solace-production.up.railway.app/api/estabelecimentos/${id}`, {
       method: 'DELETE',
       headers: this.getAuthHeaders(),
     })
@@ -144,7 +144,7 @@ class Estabelecimento extends Component {
   render() {
     const { estabelecimentos, nome, endereco, contato, loading, error, editId } = this.state;
 
-    if (loading) return <p className="estabelecimento-loading">Carregando...</p>;
+    if (loading) return <p className="cliente-loading">Carregando...</p>;
     if (error) return <p className="estabelecimento-error">Erro: {error.message}</p>;
 
     return (

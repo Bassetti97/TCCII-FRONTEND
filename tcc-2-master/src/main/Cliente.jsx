@@ -32,7 +32,7 @@ class Cliente extends Component {
 
   // Função para buscar clientes (GET)
   fetchClientes = () => {
-    fetch('http://localhost:8080/api/clientes', {
+    fetch(`https://lovely-solace-production.up.railway.app/api/clientes`, {
       headers: {
         'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ class Cliente extends Component {
   addCliente = () => {
     const { nome, cpf } = this.state;
     if (nome && cpf) {
-      fetch('http://localhost:8080/api/clientes', {
+      fetch(`https://lovely-solace-production.up.railway.app/api/clientes`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${this.token}`,
@@ -96,7 +96,7 @@ class Cliente extends Component {
   updateCliente = (id) => {
     const { nome, cpf } = this.state;
     if (nome && cpf) {
-      fetch(`http://localhost:8080/api/clientes/${id}`, {
+      fetch(`https://lovely-solace-production.up.railway.app/api/clientes/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${this.token}`,
@@ -136,7 +136,7 @@ class Cliente extends Component {
 
   // Função para deletar cliente (DELETE)
   deleteCliente = (id) => {
-    fetch(`http://localhost:8080/api/clientes/${id}`, {
+    fetch(`https://lovely-solace-production.up.railway.app/api/clientes/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${this.token}`,
@@ -295,7 +295,6 @@ class Cliente extends Component {
             </button>
           </form>
 
-          {/* Listagem dos clientes filtrados */}
           <ul className="cliente-list">
             {filteredClientes.length > 0 ? (
               filteredClientes.map((cliente) => (

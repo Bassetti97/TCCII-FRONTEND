@@ -12,17 +12,16 @@ class Login extends Component {
     };
   }
 
-  // Manipulador de input
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   handleLogin = () => {
-    const { email, senha } = this.state; // Assumindo que você tem esses campos no estado
-    this.setState({ loading: true }); // Inicia o carregamento
+    const { email, senha } = this.state;
+    this.setState({ loading: true });
 
     // Enviando email e senha para o backend
-    fetch('http://localhost:8080/auth/login', { // Use a URL completa do seu backend
+    fetch(`https://lovely-solace-production.up.railway.app/auth/login`, { // Use a URL completa do seu backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,27 +29,24 @@ class Login extends Component {
       body: JSON.stringify({ email, senha }),
     })
       .then((response) => {
-        console.log('Resposta do servidor:', response); // Log da resposta completa
+        console.log('Resposta do servidor:', response);
         if (!response.ok) {
-          throw new Error('Erro na resposta do servidor'); // Adiciona um erro se a resposta não for ok
+          throw new Error('Erro na resposta do servidor');
         }
         return response.json();
       })
       .then((data) => {
-        console.log('Dados recebidos:', data); // Log dos dados recebidos
+        console.log('Dados recebidos:', data);
         if (data.token) {
-          // Salvando o token no localStorage
           localStorage.setItem('token', data.token);
-          // Redirecionando para a página de agendamento
           this.props.navigate('/agendamento');
           alert('Login realizado com sucesso');
         } else {
-          // Tratar erro de login
           this.setState({ error: 'Login falhou. Verifique suas credenciais.' });
         }
       })
       .catch((error) => {
-        console.error('Erro ao fazer login:', error); // Log do erro
+        console.error('Erro ao fazer login:', error);
         this.setState({ error: 'Erro ao fazer login. Tente novamente.' });
       })
       .finally(() => {
@@ -91,7 +87,6 @@ class Login extends Component {
   }
 }
 
-// Componente que envolve o Login para obter a função navigate
 const LoginWithNavigate = (props) => {
   const navigate = useNavigate();
   return <Login {...props} navigate={navigate} />;
