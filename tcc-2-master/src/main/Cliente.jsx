@@ -21,6 +21,7 @@ class Cliente extends Component {
       editId: null,
       loading: true,
       error: null,
+      showMenu: false, // Adicionado para controlar o menu
     };
   }
 
@@ -29,6 +30,10 @@ class Cliente extends Component {
   componentDidMount() {
     this.fetchClientes();
   }
+
+  toggleMenu = () => {
+    this.setState(prevState => ({ showMenu: !prevState.showMenu }));
+  };
 
   // Função para buscar clientes (GET)
   fetchClientes = () => {
@@ -72,8 +77,8 @@ class Cliente extends Component {
         })
         .then((newCliente) => {
           this.setState((prevState) => ({
-            clientes: [...prevState.clientes, newCliente], // Adiciona o novo cliente à lista
-            nome: '', // Limpa o campo
+            clientes: [...prevState.clientes, newCliente],
+            nome: '',
             cpf: '',
             dataNascimento: '',
             logradouro: '',
@@ -113,9 +118,9 @@ class Cliente extends Component {
         .then((updatedCliente) => {
           this.setState((prevState) => ({
             clientes: prevState.clientes.map((cliente) =>
-              cliente.id === id ? updatedCliente : cliente // Atualiza o cliente na lista
+              cliente.id === id ? updatedCliente : cliente
             ),
-            nome: '', // Limpa os campos
+            nome: '',
             cpf: '',
             dataNascimento: '',
             logradouro: '',
@@ -144,11 +149,9 @@ class Cliente extends Component {
       },
     })
       .then((response) => {
-        console.log('Response:', response);
         if (!response.ok) {
           throw new Error('Erro ao remover cliente.');
         }
-        // Atualiza a lista de clientes
         this.setState((prevState) => ({
           clientes: prevState.clientes.filter((cliente) => cliente.id !== id),
         }));
@@ -190,7 +193,7 @@ class Cliente extends Component {
   };
 
   render() {
-    const { loading, error, clientes, searchValue } = this.state;
+    const { loading, error, clientes, searchValue, showMenu } = this.state;
     const filteredClientes = clientes.filter(cliente =>
       cliente.nome.toLowerCase().includes(searchValue)
     );
@@ -207,23 +210,26 @@ class Cliente extends Component {
       <div className='agendamento-home-container'>
         <header>
           <nav>
-            <ul>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to="/agendamento">Agendamento</Link></li>
-              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
-              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
-              <li><Link to="/login">Login</Link></li>
-            </ul>
+            <div className="menu-icon" onClick={this.toggleMenu}>
+              &#x22EE; {/* Ícone de três pontinhos */}
+            </div>
+            <h1 className="home-h1">BeautyBooker</h1>
+            {showMenu && (
+              <ul className="dropdown-menu">
+                <li><Link to="/">Início</Link></li>
+                <li><Link to="/agendamento">Agendamento</Link></li>
+                <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+                <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+                <li><Link to="/login">Login</Link></li>
+              </ul>
+            )}
           </nav>
         </header>
-
 
         <div className="cliente-container">
           <h1 className="cliente-title">Cadastro de Clientes</h1>
 
-
           <ClientSearch onClientSelect={this.handleEdit} />
-
 
           <form className="cliente-form" onSubmit={this.handleSubmit}>
             <input
@@ -298,17 +304,11 @@ class Cliente extends Component {
           {/* Listagem dos clientes filtrados */}
           <ul className="cliente-list">
             {filteredClientes.length > 0 ? (
-              filteredClientes.map((cliente) => (
-                <li className="cliente-item" key={cliente.id}>
-
-                  <div className="cliente-details">
-                    <p>Nome: {cliente.nome}</p>
-                    <p>CPF: {cliente.cpf}</p>
-                  </div>
-                  <div className="cliente-button-group">
-                    <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
-                    <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
-                  </div>
+              filteredClientes.map(cliente => (
+                <li key={cliente.id} className="cliente-item">
+                  <span>{cliente.nome}</span>
+                  <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
+                  <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
                 </li>
               ))
             ) : (
@@ -316,6 +316,11 @@ class Cliente extends Component {
             )}
           </ul>
         </div>
+
+        <footer>
+          
+          <p>Descrição da Plataforma: Um sistema integrado para gerenciar o cadastro e agendamentos de clientes, facilitando a organização e atendimento.</p>
+        </footer>
       </div>
     );
   }

@@ -13,12 +13,17 @@ class Estabelecimento extends Component {
       editId: null,
       loading: true,
       error: null,
+      showMenu: false, // Estado para controlar o menu
     };
   }
 
   componentDidMount() {
     this.fetchEstabelecimentos();
   }
+
+  toggleMenu = () => {
+    this.setState((prevState) => ({ showMenu: !prevState.showMenu }));
+  };
 
   getAuthHeaders = () => {
     const token = localStorage.getItem('token');
@@ -142,28 +147,32 @@ class Estabelecimento extends Component {
   };
 
   render() {
-    const { estabelecimentos, nome, endereco, contato, loading, error, editId } = this.state;
+    const { estabelecimentos, nome, endereco, contato, loading, error, editId, showMenu } = this.state;
 
     if (loading) return <p className="estabelecimento-loading">Carregando...</p>;
     if (error) return <p className="estabelecimento-error">Erro: {error.message}</p>;
 
     return (
-
       <div className='agendamento-home-container'>
         <header>
           <nav>
-            <ul>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to="/agendamento">Agendamento</Link></li>
-              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
-              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
-              <li><Link to="/login">Login</Link></li>
-            </ul>
+            <div className="menu-icon" onClick={this.toggleMenu}>
+              &#x22EE; {/* Ícone de três pontinhos */}
+            </div>
+            <h1 className="home-h1">BeautyBooker</h1>
+            {showMenu && (
+              <ul className="dropdown-menu">
+                <li><Link to="/">Início</Link></li>
+                <li><Link to="/agendamento">Agendamento</Link></li>
+                <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+                <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+                <li><Link to="/login">Login</Link></li>
+              </ul>
+            )}
           </nav>
         </header>
 
         <div className="estabelecimento-container">
-
           <h1 className="estabelecimento-title">Cadastro de Estabelecimentos</h1>
 
           <form className="estabelecimento-form" onSubmit={this.handleSubmit}>
@@ -199,7 +208,6 @@ class Estabelecimento extends Component {
           <ul className="estabelecimento-list">
             {estabelecimentos.map((estabelecimento) => (
               <li key={estabelecimento.id} className="estabelecimento-item">
-
                 <div className="estabelecimento-details">
                   <p>Nome do Estabelecimento: {estabelecimento.nome}</p>
                   <p>Endereço: {estabelecimento.endereco}</p>

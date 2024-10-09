@@ -18,10 +18,11 @@ main {
   font-family: Arial, sans-serif; /* Fonte padrão */
 }
 
-header {
+.header-agendamento{
   background-color: #007bff;     /* Cor do cabeçalho */
   color: white;                   /* Cor do texto no cabeçalho */
-  padding: 15px 20px;             /* Espaçamento interno do cabeçalho */
+  padding: 15px 20px;
+  padding: 30px;             /* Espaçamento interno do cabeçalho */
 }
 
 nav ul {
@@ -38,7 +39,7 @@ nav ul {
 
 
 nav ul li {
-  font-size: 1.1em;               /* Tamanho da fonte */
+  font-size: 1.4em;               /* Tamanho da fonte */
 }
 
 nav ul li a {
@@ -60,7 +61,7 @@ nav ul li a:hover {
 }
 
 h1 {
-  font-size: 2.5em;              /* Tamanho da fonte do título */
+  font-size: 4.5em;              /* Tamanho da fonte do título */
   margin: 0;                     /* Remove margens */
 }
 
@@ -90,7 +91,7 @@ footer {
   text-align: center;            /* Centraliza o texto no rodapé */
   padding: 15px 0;              /* Espaçamento interno */
   background-color: #007bff;    /* Cor do fundo do rodapé */
-  color: white;                  /* Cor do texto do rodapé */
+  color: rgb(0, 185, 252);                  /* Cor do texto do rodapé */
 }
 
 footer p {
@@ -125,9 +126,25 @@ footer p {
 }
 
 h1 {
-  font-size: 2.5em;              /* Tamanho da fonte do título */
-  margin-bottom: 20px;           /* Margem inferior */
+           /* Tamanho da fonte do título */
+  margin-bottom: 20px;  
+  color: #0056b3;    
+  margin-left: 30px; /* Ajuste o espaço entre o ícone e o nome */
+  font-size: 24px; /* Tamanho da fonte */
+  font-weight: bold; /* Estilo da fonte */
+  transform: translateY(10px); 
 }
+
+h2 {
+  /* Tamanho da fonte do título */
+margin-bottom: 20px;  
+color: #0056b3;    
+margin-left: 30px; /* Ajuste o espaço entre o ícone e o nome */
+font-size: 24px; /* Tamanho da fonte */
+font-weight: bold; 
+transform: translateY(4px); 
+}
+
 
 form {
   background-color: white;       /* Fundo branco para o formulário */
@@ -278,6 +295,61 @@ button:disabled {
   margin-right: 20px; /* Espaço entre detalhes e botões */
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #007BFF;
+  padding: 10px;
+  position: relative;
+  
+}
+
+.ponto-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  transform: translateY(3px); 
+  left: 20px;
+}
+
+.dropdown-menu {
+  list-style-type: none;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 0px;
+  top: 50px;
+  z-index: 1;
+  width: 150px;
+  border-radius: 4px;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-menu li:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+.dropdown-menu li:hover a {
+  color: white;
+}
 .estabelecimento-details p {
   margin: 5px 0; /* Espaçamento entre os parágrafos */
 }
@@ -312,6 +384,17 @@ button:disabled {
 .estabelecimento-button-delete:hover {
   background-color: #c82333;
 }
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.logo-name {
+  margin-left: 30px; /* Ajuste o espaço entre o ícone e o nome */
+  font-size: 24px; /* Tamanho da fonte */
+  font-weight: bold; /* Estilo da fonte */
+  color: #002afb; /* Cor do texto (ajuste conforme sua paleta) */
+}
 
 .estabelecimento-loading,
 .estabelecimento-error {
@@ -326,7 +409,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
   min-height: 100vh;
   
 
