@@ -206,6 +206,8 @@ class Cliente extends Component {
       return <p className="cliente-error">Erro: {error}</p>;
     }
 
+
+    
     return (
       <div className='agendamento-home-container'>
         <header>

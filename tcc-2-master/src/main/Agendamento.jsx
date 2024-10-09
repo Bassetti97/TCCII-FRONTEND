@@ -102,6 +102,9 @@ class Agendamento extends Component {
       return <p className='agendamento-error'>Erro: {error.message}</p>;
     }
 
+
+
+    
     const agendamentosFuturos = agendamentos
       .filter(agendamento => new Date(agendamento.dataHorario) > new Date())
       .sort((a, b) => new Date(a.dataHorario) - new Date(b.dataHorario));

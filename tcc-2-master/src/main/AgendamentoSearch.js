@@ -3,6 +3,7 @@ import React from 'react';
 const AgendamentoSearch = ({ agendamentos, cliente }) => {
     return (
         <div className="agendamentos-container">
+     
             <h2>Agendamentos de {cliente.nome}</h2>
 
             {agendamentos.length > 0 ? (

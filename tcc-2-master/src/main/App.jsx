@@ -23,6 +23,8 @@ const Home = () => {
           <div className="menu-icon" onClick={toggleMenu}>
             &#x22EE; {/* Ícone de três pontinhos */}
             
+
+            
           </div>
           <span className="logo-name">BeautyBooker</span> {/* Nome da plataforma */}
           {showMenu && (
