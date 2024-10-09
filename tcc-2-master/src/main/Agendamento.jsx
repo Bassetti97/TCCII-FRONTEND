@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AgendamentoSearch from './AgendamentoSearch';
+import logo from './logo.png';
 
 class Agendamento extends Component {
   constructor(props) {
@@ -15,11 +16,9 @@ class Agendamento extends Component {
       editId: null,
       loading: true,
       error: null,
-      clients: [],
-      filteredClients: [],
-      clienteSelecionado: null,
-      showMenu: false, // Controle para mostrar/ocultar o menu
       errorMessage: null,
+      showMenu: false,
+      submitting: false, // Add state for submitting
     };
   }
 
@@ -54,6 +53,7 @@ class Agendamento extends Component {
     const { dataHorario, tipoServico, clienteNome, estabelecimentoNome } = this.state;
 
     if (dataHorario && tipoServico && clienteNome && estabelecimentoNome) {
+      this.setState({ submitting: true }); // Set submitting state
       fetch(`https://lovely-solace-production.up.railway.app/api/agendamentos`, {
         method: 'POST',
         headers: {
@@ -78,22 +78,23 @@ class Agendamento extends Component {
             clienteNome: '',
             estabelecimentoNome: '',
             errorMessage: null,
+            submitting: false, // Reset submitting state
           }));
         })
         .catch((error) => {
-          this.setState({ errorMessage: error.message });
+          this.setState({ errorMessage: error.message, submitting: false }); // Reset submitting state
         });
     } else {
       this.setState({ errorMessage: 'Por favor, preencha todos os campos!' });
     }
   };
 
-
   // Método para atualizar um agendamento (PUT)
   updateAgendamento = (id) => {
     const { dataHorario, tipoServico, clienteNome, estabelecimentoNome } = this.state;
 
     if (dataHorario && tipoServico && clienteNome && estabelecimentoNome) {
+      this.setState({ submitting: true }); // Set submitting state
       fetch(`https://lovely-solace-production.up.railway.app/api/agendamentos/${id}`, {
         method: 'PUT',
         headers: {
@@ -113,10 +114,12 @@ class Agendamento extends Component {
             clienteNome: '',
             estabelecimentoNome: '',
             editId: null,
+            submitting: false, // Reset submitting state
           }));
         })
         .catch((error) => {
           console.error('Erro ao atualizar agendamento:', error);
+          this.setState({ submitting: false }); // Reset submitting state
         });
     }
   };
@@ -168,7 +171,7 @@ class Agendamento extends Component {
   };
 
   render() {
-    const { agendamentos, dataHorario, tipoServico, clienteNome, estabelecimentoNome, loading, error, editId, errorMessage } = this.state;
+    const { agendamentos, dataHorario, tipoServico, clienteNome, estabelecimentoNome, loading, error, editId, errorMessage, showMenu, submitting } = this.state;
 
     if (loading) {
       return <p className='cliente-loading'>Carregando...</p>;
@@ -178,9 +181,6 @@ class Agendamento extends Component {
       return <p className='agendamento-error'>Erro: {error.message}</p>;
     }
 
-
-
-    
     const agendamentosFuturos = agendamentos
       .filter(agendamento => new Date(agendamento.dataHorario) > new Date())
       .sort((a, b) => new Date(a.dataHorario) - new Date(b.dataHorario));
@@ -191,9 +191,9 @@ class Agendamento extends Component {
           <nav>
             <div className="ponto-icon" onClick={this.toggleMenu}>
               &#x22EE; {/* Ícone de três pontinhos */}
-              
             </div>
-            <h2 className="home-h2">BeautyBooker</h2>
+            <img src={logo} alt="Logo" className='img-logo' />
+            <h1 className="home-h1">BeautyBooker</h1>
             {showMenu && (
               <ul className="dropdown-menu">
                 <li><Link to="/">Início</Link></li>
@@ -208,7 +208,6 @@ class Agendamento extends Component {
 
         <div className='agendamento-container'>
           <h1 className='agendamento-title'>Agendamento de Horários</h1>
-
 
           <AgendamentoSearch />
 
@@ -247,8 +246,8 @@ class Agendamento extends Component {
               className='agendamento-input'
               placeholder="Nome do Estabelecimento"
             />
-            <button className='agendamento-button' type="submit">
-              {editId ? 'Atualizar' : 'Adicionar'}
+            <button type="submit" className='agendamento-button' disabled={submitting}>
+              {submitting ? 'Enviando...' : (editId ? 'Atualizar' : 'Adicionar')}
             </button>
           </form>
 

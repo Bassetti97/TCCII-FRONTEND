@@ -59,14 +59,10 @@ class Login extends Component {
 
     return (
       <div className= 'login-container'>
-
-        
-
-        
-        <h1>Login</h1>
         {error && <p className='login.error' style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={(e) => { e.preventDefault(); this.handleLogin(); }}>
-          <input
+        <h1 style={{ color: '#007bff' }} >Login</h1>
+          <input className='input.login'
             type="email"
             name="email"
             value={email}
@@ -74,7 +70,7 @@ class Login extends Component {
             placeholder="Email"
             required
           />
-          <input
+          <input className='input.login'
             type="password"
             name="senha"
             value={senha}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ClientSearch from './ClientSearch';
 import './App.css';
 import { Link } from 'react-router-dom';
+import logo from './logo.png';
 
 class Cliente extends Component {
   constructor(props) {
@@ -212,9 +213,10 @@ class Cliente extends Component {
       <div className='agendamento-home-container'>
         <header>
           <nav>
-            <div className="menu-icon" onClick={this.toggleMenu}>
+            <div className="ponto-icon" onClick={this.toggleMenu}>
               &#x22EE; {/* Ícone de três pontinhos */}
             </div>
+            <img src={logo} alt="Logo" className='img-logo' />
             <h1 className="home-h1">BeautyBooker</h1>
             {showMenu && (
               <ul className="dropdown-menu">
@@ -307,9 +309,14 @@ class Cliente extends Component {
             {filteredClientes.length > 0 ? (
               filteredClientes.map(cliente => (
                 <li key={cliente.id} className="cliente-item">
-                  <span>{cliente.nome}</span>
-                  <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
-                  <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
+                 <div className="cliente-details">
+                    <p>Cliente: {cliente.nome}</p>
+                    <p>CPF: {cliente.cpf}</p>
+                  </div>
+                  <div className="cliente-button-group">
+                    <button onClick={() => this.handleEdit(cliente)} className="cliente-edit-button">Editar</button>
+                    <button onClick={() => this.deleteCliente(cliente.id)} className="cliente-delete-button">Excluir</button>
+                  </div>
                 </li>
               ))
             ) : (
@@ -318,10 +325,7 @@ class Cliente extends Component {
           </ul>
         </div>
 
-        <footer>
-          
-          <p>Descrição da Plataforma: Um sistema integrado para gerenciar o cadastro e agendamentos de clientes, facilitando a organização e atendimento.</p>
-        </footer>
+        
       </div>
     );
   }

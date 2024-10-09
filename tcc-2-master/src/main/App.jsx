@@ -5,15 +5,8 @@ import Login from './Login';
 import Cliente from './Cliente'; 
 import Agendamento from './Agendamento'; 
 import Estabelecimento from './Estabelecimento';
+import logo from './logo.png';
 
-// Componente com Imagem (removido)
-const ImageComponent = () => {
-  return (
-    <div className="image-container">
-      {/* Imagem removida */}
-    </div>
-  );
-};
 
 // Componente Home
 const Home = () => {
@@ -25,15 +18,11 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <header>
+      <header className='header-home' style={{ padding: '30px' }}>
         <nav>
-          <div className="menu-icon" onClick={toggleMenu}>
+          <div className="ponto-icon" onClick={toggleMenu}>
             &#x22EE; {/* Ícone de três pontinhos */}
-            
-
-            
           </div>
-          <span className="logo-name">BeautyBooker</span> {/* Nome da plataforma */}
           {showMenu && (
             <ul className="dropdown-menu">
               <li><Link to="/">Início</Link></li>
@@ -47,7 +36,8 @@ const Home = () => {
       </header>
       <main>
         <div className="container">
-          <h1 className="home-h1">BeautyBooker</h1>
+        <img src={logo} alt="Logo" className='img-logo-home' />
+        <h1 style={{ color: '#007bff' }} className="home-letreiro">BeautyBooker</h1>
           <p>A plataforma de agendamentos, onde a eficiência encontra a simplicidade para otimizar seu tempo.</p>
           <Link to="/login" className="login-button">LOGIN</Link>
         </div>

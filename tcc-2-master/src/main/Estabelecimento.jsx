@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import logo from './logo.png';
 
 class Estabelecimento extends Component {
   constructor(props) {
@@ -156,9 +157,10 @@ class Estabelecimento extends Component {
       <div className='agendamento-home-container'>
         <header>
           <nav>
-            <div className="menu-icon" onClick={this.toggleMenu}>
+            <div className="ponto-icon" onClick={this.toggleMenu}>
               &#x22EE; {/* Ícone de três pontinhos */}
             </div>
+            <img src={logo} alt="Logo" className='img-logo' />
             <h1 className="home-h1">BeautyBooker</h1>
             {showMenu && (
               <ul className="dropdown-menu">

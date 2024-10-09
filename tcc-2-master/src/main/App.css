@@ -13,6 +13,15 @@ main {
   /* Espaçamento interno */
 }
 
+.home-letreiro{
+  font-size: 30px;
+  color: #007bff;
+}
+
+.img-logo-home{
+  width: 150px;
+}
+
 /* Estilos para o Componente Home */
 .home-container {
   display: flex;
@@ -31,16 +40,16 @@ header {
   background-color: #007bff;
   /* Cor do cabeçalho */
   color: white;
-  /* Cor do texto no cabeçalho */
-  padding: 15px 20px;
   /* Espaçamento interno do cabeçalho */
+  padding: 10px;
 }
 
 .header-agendamento{
   background-color: #007bff;     /* Cor do cabeçalho */
   color: white;                   /* Cor do texto no cabeçalho */
   padding: 15px 20px;
-  padding: 30px;             /* Espaçamento interno do cabeçalho */
+  padding: 30px;  
+  font-size: 28px           /* Espaçamento interno do cabeçalho */
 }
 
 nav ul {
@@ -79,16 +88,16 @@ nav ul li a:hover {
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 60vh;
   max-width: 600px;
-  /* Largura máxima do conteúdo */
-  background-color: white;
-  /* Fundo branco para o conteúdo */
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
-  /* Bordas arredondadas */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  /* Sombra suave */
-  padding: 30px;
-  /* Espaçamento interno */
 }
 
 h1 {
@@ -96,7 +105,14 @@ h1 {
   /* Tamanho da fonte do título */
   margin: 0;
   /* Remove margens */
+  margin-bottom: 20px;
+  /* Margem inferior */
+  color: #0004ff;
+  font-size: 24px;
+  transform: translateY(13px);
 }
+
+
 
 p {
   font-size: 1em;
@@ -104,6 +120,7 @@ p {
   color: #666;
   /* Cor do texto */
   margin: 20px 0;
+  transform: translateY(10px);
   /* Margem vertical */
 }
 
@@ -126,6 +143,7 @@ p {
   /* Tamanho da fonte do botão */
   transition: background-color 0.3s;
   /* Transição suave para hover */
+  transform: translateY(30px);
 }
 
 .login-button:hover {
@@ -167,32 +185,25 @@ footer p {
     font-size: 0.9em;
     /* Tamanho da fonte do botão menor */
   }
+  .login-container{
+    padding: 30px;
+  }
+
+
 }
 
 /* Estilos para o Componente Login */
 .login-container {
   display: flex;
-  /* Usando flexbox para layout */
   flex-direction: column;
-  /* Itens dispostos em coluna */
   align-items: center;
-  /* Centraliza horizontalmente */
-  justify-content: center;
-  /* Centraliza verticalmente */
-  height: 100vh;
-  /* Altura da tela cheia */
-  background-color: #f0f0f0;
-  /* Fundo suave */
-  font-family: Arial, sans-serif;
-  /* Fonte padrão */
+  justify-content: center; /* Centraliza verticalmente */
+  height: 100vh; /* Altura da tela cheia */
+  background-color: #f0f0f0; /* Fundo suave */
+  font-family: Arial, sans-serif; /* Fonte padrão */
 }
 
-h1 {
-  font-size: 2.5em;
-  /* Tamanho da fonte do título */
-  margin-bottom: 20px;
-  /* Margem inferior */
-}
+
 
 h2 {
   /* Tamanho da fonte do título */
@@ -222,7 +233,7 @@ form {
 
 input[type="email"],
 input[type="password"] {
-  width: 100%;
+  width: 95%;
   /* Largura total dos campos */
   padding: 10px;
   /* Espaçamento interno */
@@ -299,6 +310,7 @@ button:disabled {
   input[type="email"],
   input[type="password"] {
     font-size: 0.9em;
+    
     /* Tamanho da fonte dos campos menor */
   }
 
@@ -402,8 +414,23 @@ header {
   
 }
 
-.ponto-icon {
-  font-size: 20px;
+.home-h1{
+    margin-bottom: 20px;
+    color: white;
+    font-size: 24px;
+    transform: translateY(13px);
+}
+
+.img-logo{
+  width: 50px; 
+  height: auto; 
+  margin-left: 20px;
+}
+
+
+
+.ponto-icon{
+  font-size: 28px;
   cursor: pointer;
   color: white;
   position: absolute;
@@ -576,6 +603,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  
   /* Mantém o alinhamento ao topo */
 }
 
@@ -652,18 +680,12 @@ nav {
   }
 }
 
-/* Estilos para a página do Cliente */
-/* CSS para Gerenciamento de Clientes */
-
-/* Container Principal */
-
 /* Estilos para a barra de pesquisa */
 .cliente-search {
   width: 97%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #007bff;
-  /* Borda azul */
   border-radius: 4px;
   font-size: 16px;
 }
