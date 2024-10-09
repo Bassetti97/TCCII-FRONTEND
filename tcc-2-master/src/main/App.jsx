@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Login from './Login'; 
@@ -17,17 +17,32 @@ const ImageComponent = () => {
 
 // Componente Home
 const Home = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <div className="home-container">
       <header>
         <nav>
-          <ul>
-            <li><Link to="/">Início</Link></li>
-            <li><Link to="/agendamento">Agendamento</Link></li>
-            <li><Link to="/estabelecimento">Estabelecimento</Link></li>
-            <li><Link to="/cliente">Cadastro de Clientes</Link></li>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
+          <div className="menu-icon" onClick={toggleMenu}>
+            &#x22EE; {/* Ícone de três pontinhos */}
+            
+
+            
+          </div>
+          <span className="logo-name">BeautyBooker</span> {/* Nome da plataforma */}
+          {showMenu && (
+            <ul className="dropdown-menu">
+              <li><Link to="/">Início</Link></li>
+              <li><Link to="/agendamento">Agendamento</Link></li>
+              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          )}
         </nav>
       </header>
       <main>
@@ -53,7 +68,6 @@ const App = () => {
         <Route path="/cliente" element={<Cliente />} /> {/* Página de Cliente */}
         <Route path="/agendamento" element={<Agendamento />} /> {/* Página de Agendamento */}
         <Route path="/estabelecimento" element={<Estabelecimento />} /> {/* Página de Estabelecimento */}
-      
       </Routes>
     </Router>
   );

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Link } from 'react-router-dom';
 import AgendamentoSearch from './AgendamentoSearch';
-
 
 class Agendamento extends Component {
   constructor(props) {
@@ -19,6 +17,9 @@ class Agendamento extends Component {
       error: null,
       clients: [],
       filteredClients: [],
+      clienteSelecionado: null,
+      showMenu: false, // Controle para mostrar/ocultar o menu
+      errorMessage: null,
     };
   }
 
@@ -28,7 +29,6 @@ class Agendamento extends Component {
     this.fetchAgendamentos();
   }
 
-  // Método para buscar agendamentos (GET)
   fetchAgendamentos = () => {
     fetch(`https://lovely-solace-production.up.railway.app/api/agendamentos`, {
       method: 'GET',
@@ -46,7 +46,10 @@ class Agendamento extends Component {
       });
   };
 
-  // Método para adicionar um agendamento (POST)
+  toggleMenu = () => {
+    this.setState((prevState) => ({ showMenu: !prevState.showMenu }));
+  };
+
   addAgendamento = () => {
     const { dataHorario, tipoServico, clienteNome, estabelecimentoNome } = this.state;
 
@@ -175,7 +178,9 @@ class Agendamento extends Component {
       return <p className='agendamento-error'>Erro: {error.message}</p>;
     }
 
-    // Filtrar agendamentos que já passaram e ordenar por data e horário
+
+
+    
     const agendamentosFuturos = agendamentos
       .filter(agendamento => new Date(agendamento.dataHorario) > new Date())
       .sort((a, b) => new Date(a.dataHorario) - new Date(b.dataHorario));
@@ -184,13 +189,20 @@ class Agendamento extends Component {
       <div className='agendamento-home-container'>
         <header>
           <nav>
-            <ul>
-              <li><Link to="/">Início</Link></li>
-              <li><Link to="/agendamento">Agendamento</Link></li>
-              <li><Link to="/estabelecimento">Estabelecimento</Link></li>
-              <li><Link to="/cliente">Cadastro de Clientes</Link></li>
-              <li><Link to="/login">Login</Link></li>
-            </ul>
+            <div className="ponto-icon" onClick={this.toggleMenu}>
+              &#x22EE; {/* Ícone de três pontinhos */}
+              
+            </div>
+            <h2 className="home-h2">BeautyBooker</h2>
+            {showMenu && (
+              <ul className="dropdown-menu">
+                <li><Link to="/">Início</Link></li>
+                <li><Link to="/agendamento">Agendamento</Link></li>
+                <li><Link to="/estabelecimento">Estabelecimento</Link></li>
+                <li><Link to="/cliente">Cadastro de Clientes</Link></li>
+                <li><Link to="/login">Login</Link></li>
+              </ul>
+            )}
           </nav>
         </header>
 
@@ -266,7 +278,6 @@ class Agendamento extends Component {
       </div>
     );
   }
-
 }
 
 export default Agendamento;

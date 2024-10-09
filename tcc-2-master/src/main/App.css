@@ -36,6 +36,13 @@ header {
   /* Espaçamento interno do cabeçalho */
 }
 
+.header-agendamento{
+  background-color: #007bff;     /* Cor do cabeçalho */
+  color: white;                   /* Cor do texto no cabeçalho */
+  padding: 15px 20px;
+  padding: 30px;             /* Espaçamento interno do cabeçalho */
+}
+
 nav ul {
   list-style: none;
   /* Remove marcadores da lista */
@@ -186,6 +193,17 @@ h1 {
   margin-bottom: 20px;
   /* Margem inferior */
 }
+
+h2 {
+  /* Tamanho da fonte do título */
+margin-bottom: 20px;  
+color: #0056b3;    
+margin-left: 30px; /* Ajuste o espaço entre o ícone e o nome */
+font-size: 24px; /* Tamanho da fonte */
+font-weight: bold; 
+transform: translateY(4px); 
+}
+
 
 form {
   background-color: white;
@@ -373,6 +391,61 @@ button:disabled {
   /* Espaço entre detalhes e botões */
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #007BFF;
+  padding: 10px;
+  position: relative;
+  
+}
+
+.ponto-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  transform: translateY(3px); 
+  left: 20px;
+}
+
+.dropdown-menu {
+  list-style-type: none;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 0px;
+  top: 50px;
+  z-index: 1;
+  width: 150px;
+  border-radius: 4px;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-menu li:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+.dropdown-menu li:hover a {
+  color: white;
+}
 .estabelecimento-details p {
   margin: 5px 0;
   /* Espaçamento entre os parágrafos */
@@ -409,6 +482,17 @@ button:disabled {
 
 .estabelecimento-button-delete:hover {
   background-color: #c82333;
+}
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.logo-name {
+  margin-left: 30px; /* Ajuste o espaço entre o ícone e o nome */
+  font-size: 24px; /* Tamanho da fonte */
+  font-weight: bold; /* Estilo da fonte */
+  color: #002afb; /* Cor do texto (ajuste conforme sua paleta) */
 }
 
 .estabelecimento-loading,
