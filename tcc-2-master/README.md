@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# BeautyBooker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O BeautyBooker é uma plataforma web de agendamento de horários projetada especialmente para profissionais da área da beleza. O objetivo do projeto é facilitar o agendamento de horários. Com um design intuitivo, o BeautyBooker torna o agendamento de atendimentos simples e eficiente.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Funcionalidades
+### Agendamento Simples: 
 
-### `npm start`
+Permite que os usuários agendem serviços de forma rápida e fácil, contendo o nome do cliente (que deve estar cadastrado), o nome do estabelecimento (que também deve estar cadastrado), o tipo de serviço, a data e o horário desejado. Possui uma barra de pesquisa que lista todos os agendamentos com base no nome do cliente, incluindo os agendamentos que já expiraram. Os agendamentos são organizados de forma crescente, e existem opções para editar e excluir agendamentos. Os agendamentos que já passaram são removidos da lista principal, podendo ser visualizados apenas pela barra de pesquisa.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Gerenciamento de Clientes:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Permite o cadastro dos clientes, contendo nome do cliente, CPF, data de nascimento, logradouro, complemento, CEP, telefone e e-mail. Os usuários poderão adicionar, editar e excluir informações de clientes. A plataforma também possui uma barra de pesquisa que permite encontrar ou editar as informações do cliente pesquisado (a pesquisa é realizada com base no nome do cliente).
 
-### `npm test`
+### Cadastro de Estabelecimentos:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Permite o cadastro de múltiplos locais de atendimento, contendo nome do estabelecimento, endereço e contato. Os usuários poderão adicionar, editar e excluir informações de estabelecimentos.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Visualização do sistema:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A aplicação é projetada para funcionar em dispositivos móveis e desktops, com um formato responsivo.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tecnologias Utilizadas
 
-### `npm run eject`
+- Frontend: React.js
+- Backend: Java + Spring
+- Banco de Dados: MySQL
+- Hospedagem: Vercel (para o frontend) e Railway (para o backend e banco de dados)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Como Usar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Para acessar o BeautyBooker, insira a URL beautybooker.com.br ou www.beautybooker.com.br no seu navegador e faça o login com o e-mail e senha enviados no Moodle.
